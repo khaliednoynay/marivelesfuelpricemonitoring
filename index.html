@@ -185,12 +185,10 @@
 </head>
 <body class="bg-white text-kusog-dark font-body antialiased">
 
-    <!-- ══════════════════ NAV ══════════════════ -->
     <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
 
-                <!-- Brand -->
                 <a href="#" class="flex-shrink-0 flex items-center gap-3 group">
                     <svg class="h-9 w-9 transition-transform duration-300 group-hover:scale-110" viewBox="150 90 620 560" xmlns="http://www.w3.org/2000/svg">
                         <path d="M 477.00 476.64 C477.00,607.21 476.75,640.00 475.74,640.00 C475.05,640.00 466.61,635.45 456.99,629.90 C447.37,624.34 433.20,616.17 425.50,611.73 C417.80,607.30 406.33,600.66 400.00,596.98 C380.16,585.45 369.01,578.99 352.50,569.48 C323.64,552.86 310.71,545.39 295.66,536.63 C287.50,531.88 280.63,528.00 280.39,528.00 C280.15,528.00 277.15,526.27 273.73,524.15 C270.30,522.03 261.76,517.03 254.75,513.03 L 242.00 505.76 L 242.00 369.13 L 242.01 232.50 L 254.75 225.23 C261.76,221.23 272.00,215.35 277.50,212.15 C283.00,208.95 296.73,201.00 308.00,194.48 C319.27,187.96 333.90,179.51 340.50,175.69 C347.10,171.87 363.08,162.68 376.00,155.26 C388.92,147.84 401.56,140.47 404.09,138.88 C406.61,137.30 409.20,136.00 409.84,136.00 C410.72,136.00 411.01,170.26 411.05,275.75 L 411.09 415.50 L 471.00 354.52 L 471.00 99.97 L 475.33 97.87 L 479.65 95.77 L 486.58 99.71 C495.23,104.64 510.75,113.67 518.00,117.99 C521.03,119.79 526.88,123.16 531.00,125.47 C535.12,127.78 548.17,135.30 560.00,142.17 C571.83,149.05 592.08,160.77 605.00,168.22 C641.98,189.53 643.00,190.14 643.00,190.84 C643.00,191.21 620.74,213.76 593.54,240.96 L 544.08 290.41 L 544.02 332.71 C543.99,355.97 544.31,375.00 544.74,375.00 C545.17,375.00 579.71,340.80 621.49,299.00 C663.27,257.20 698.03,223.00 698.75,223.00 C699.46,223.00 703.64,225.09 708.02,227.63 L 716.00 232.27 L 716.00 347.63 C716.00,411.09 715.66,463.00 715.25,463.00 C714.84,463.00 686.75,435.24 652.82,401.32 L 591.13 339.64 L 572.32 357.73 C561.97,367.68 552.04,377.34 550.26,379.20 L 547.02 382.57 L 617.01 452.46 C655.50,490.90 687.00,522.46 687.00,522.59 C687.00,522.72 685.09,523.91 682.75,525.22 C680.41,526.54 670.85,532.05 661.50,537.46 C596.83,574.90 559.99,596.17 550.50,601.58 L 539.50 607.84 L 539.25 448.42 C539.03,313.95 538.78,289.00 537.62,289.00 C536.23,289.00 535.08,289.44 520.50,295.48 C516.10,297.30 504.51,302.05 494.75,306.04 L 477.00 313.28 ZM 460.00 444.22 L 470.50 448.52 L 470.75 434.01 C471.40,395.74 471.44,365.02 470.84,365.25 C470.47,365.39 456.83,378.52 440.53,394.44 L 410.89 423.39 L 413.70 424.86 C415.24,425.67 420.10,427.78 424.50,429.56 C428.90,431.33 436.33,434.39 441.00,436.35 C445.67,438.31 454.23,441.85 460.00,444.22 Z" fill="#1a1c18"/>
@@ -198,7 +196,6 @@
                     <span class="font-heading font-bold text-xl sm:text-2xl tracking-wider text-kusog-dark">KUSOG BATAAN</span>
                 </a>
 
-                <!-- Desktop links -->
                 <div class="hidden md:flex items-center space-x-6">
                     <a href="#about"   class="nav-link text-sm uppercase tracking-widest px-2 py-1">About</a>
                     <a href="#recap"   class="nav-link text-sm uppercase tracking-widest px-2 py-1">Recap</a>
@@ -206,14 +203,12 @@
                     <a href="#register" class="btn-dark bg-kusog-dark text-white font-bold px-6 py-2 rounded text-sm uppercase tracking-widest">Register Now</a>
                 </div>
 
-                <!-- Hamburger -->
                 <button id="ham-btn" class="ham md:hidden flex flex-col gap-[6px] p-2 focus:outline-none" aria-label="Menu">
                     <span></span><span></span><span></span>
                 </button>
             </div>
         </div>
 
-        <!-- Mobile menu -->
         <div id="mobile-menu" class="md:hidden bg-white border-t border-gray-100">
             <div class="px-6 py-4 flex flex-col gap-4">
                 <a href="#about"    class="text-sm uppercase tracking-widest text-gray-600 hover:text-kusog-dark transition py-2" onclick="closeMenu()">About</a>
@@ -224,12 +219,10 @@
         </div>
     </nav>
 
-    <!-- ══════════════════ HERO ══════════════════ -->
     <section class="hero-bg min-h-screen flex items-center pt-20">
         <div class="w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-10 lg:py-0">
             <div class="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-0">
 
-                <!-- Logo — centered on mobile, left on desktop -->
                 <div class="logo-wrap flex-shrink-0 flex items-center justify-center lg:justify-start lg:w-1/2">
                     <svg class="w-[180px] h-[180px] sm:w-[260px] sm:h-[260px] md:w-[380px] md:h-[380px] lg:w-[520px] lg:h-[520px]"
                          viewBox="150 90 620 560" xmlns="http://www.w3.org/2000/svg">
@@ -280,13 +273,11 @@
                     </svg>
                 </div>
 
-                <!-- RIGHT — Text Content, centered on mobile -->
                 <div class="lg:w-1/2 text-center lg:text-left flex flex-col items-center lg:items-start w-full">
                     <h1 class="fade-up font-heading font-bold tracking-tighter text-white leading-[0.92] mb-5 w-full"
                         style="font-size: clamp(2.6rem, 11vw, 6.5rem);">
-                        KUSOG<br>BATAAN<br>CONFERENCE<br>
-                        <!-- Metallic shining 2026 -->
-                        <svg class="inline-block" style="height:1em; width:auto; vertical-align:baseline; overflow:visible;" viewBox="0 0 340 100" xmlns="http://www.w3.org/2000/svg">
+                        KUSOG<br>BATAAN CONFERENCE<br>
+                        <svg class="inline-block" style="height:1em; width:auto; vertical-align:baseline; overflow:visible;" viewBox="0 0 180 100" xmlns="http://www.w3.org/2000/svg">
                             <defs>
                                 <linearGradient id="silver2026" x1="0%" y1="0%" x2="0%" y2="100%">
                                     <stop offset="0%"   stop-color="#6e6e6e"/>
@@ -309,8 +300,8 @@
                             </defs>
                             <text x="0" y="92" font-family="Oswald, sans-serif" font-weight="700" font-size="100" letter-spacing="-2" fill="url(#silver2026)">2026</text>
                             <g clip-path="url(#textClip2026)">
-                                <rect y="0" width="120" height="100" fill="url(#shine2026)">
-                                    <animate attributeName="x" from="-120" to="460" dur="2.8s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+                                <rect y="0" width="180" height="100" fill="url(#shine2026)">
+                                    <animate attributeName="x" from="-120" to="300" dur="2.8s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1"/>
                                 </rect>
                             </g>
                         </svg>
@@ -328,7 +319,6 @@
             </div>
         </div>
     </section>
-    <!-- ══════════════════ RECAP ══════════════════ -->
     <section id="recap" class="py-16 sm:py-24 bg-gray-50">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="fade-up font-heading text-3xl sm:text-4xl md:text-6xl font-bold text-kusog-dark mb-4 leading-tight">
@@ -348,7 +338,6 @@
         </div>
     </section>
 
-    <!-- ══════════════════ ABOUT ══════════════════ -->
     <section id="about" class="py-16 sm:py-24 bg-white">
         <div class="max-w-4xl mx-auto px-4 text-center">
             <h2 class="fade-up word-kusog font-heading text-5xl sm:text-6xl md:text-7xl font-bold mb-4 text-kusog-dark">/ku·sog/</h2>
@@ -358,7 +347,6 @@
         </div>
     </section>
 
-    <!-- ══════════════════ MISSION ══════════════════ -->
     <section id="mission" class="py-16 sm:py-24 bg-kusog-dark">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="fade-up font-heading text-3xl sm:text-4xl font-bold mb-8 text-white/30 tracking-widest uppercase">Our Mission</h2>
@@ -368,7 +356,6 @@
         </div>
     </section>
 
-    <!-- ══════════════════ REGISTER ══════════════════ -->
     <section id="register" class="py-16 sm:py-24 bg-gray-50">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="fade-up bg-white p-6 sm:p-8 md:p-12 rounded-2xl border border-gray-200 shadow-lg">
@@ -404,7 +391,6 @@
         </div>
     </section>
 
-    <!-- ══════════════════ FOOTER ══════════════════ -->
     <footer class="bg-kusog-dark py-10 sm:py-12">
         <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-6">
             <div class="flex items-center gap-3 opacity-70 hover:opacity-100 transition-opacity duration-300">
