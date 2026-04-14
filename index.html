@@ -9,7 +9,7 @@
                    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
                    font-src https://fonts.gstatic.com;
                    img-src 'self' data: https://images.unsplash.com https://*.ytimg.com;
-                   connect-src 'self' https://api.emailjs.com;
+                   connect-src 'self' https://api.emailjs.com https://script.google.com https://script.googleusercontent.com;
                    frame-src https://www.youtube.com https://www.youtube-nocookie.com;
                    frame-ancestors 'none';">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -391,15 +391,33 @@
                         <input type="text" name="website" tabindex="-1" autocomplete="off">
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
                         <div>
-                            <label for="reg-name" class="block text-xs font-semibold mb-2 uppercase tracking-wider text-kusog-dark">Full Name</label>
-                            <input id="reg-name" type="text" name="full_name" required
-                                   minlength="2" maxlength="100"
-                                   pattern="[A-Za-z\u00C0-\u024F\s'\-]{2,100}"
-                                   autocomplete="name"
-                                   class="input-field w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 text-kusog-dark placeholder-gray-400" placeholder="Juan Dela Cruz">
+                            <label for="reg-first-name" class="block text-xs font-semibold mb-2 uppercase tracking-wider text-kusog-dark">First Name</label>
+                            <input id="reg-first-name" type="text" name="first_name" required
+                                   minlength="1" maxlength="50"
+                                   pattern="[A-Za-z\u00C0-\u024F\s'\-]{1,50}"
+                                   autocomplete="given-name"
+                                   class="input-field w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 text-kusog-dark placeholder-gray-400" placeholder="Juan">
                         </div>
+                        <div>
+                            <label for="reg-middle-name" class="block text-xs font-semibold mb-2 uppercase tracking-wider text-kusog-dark">Middle Name</label>
+                            <input id="reg-middle-name" type="text" name="middle_name"
+                                   maxlength="50"
+                                   pattern="[A-Za-z\u00C0-\u024F\s'\-]{0,50}"
+                                   autocomplete="additional-name"
+                                   class="input-field w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 text-kusog-dark placeholder-gray-400" placeholder="Optional">
+                        </div>
+                        <div>
+                            <label for="reg-last-name" class="block text-xs font-semibold mb-2 uppercase tracking-wider text-kusog-dark">Last Name</label>
+                            <input id="reg-last-name" type="text" name="last_name" required
+                                   minlength="1" maxlength="50"
+                                   pattern="[A-Za-z\u00C0-\u024F\s'\-]{1,50}"
+                                   autocomplete="family-name"
+                                   class="input-field w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 text-kusog-dark placeholder-gray-400" placeholder="Dela Cruz">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
                             <label for="reg-email" class="block text-xs font-semibold mb-2 uppercase tracking-wider text-kusog-dark">Email Address</label>
                             <input id="reg-email" type="email" name="email" required
@@ -407,8 +425,6 @@
                                    autocomplete="email"
                                    class="input-field w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 text-kusog-dark placeholder-gray-400" placeholder="juan@example.com">
                         </div>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
                             <label for="reg-phone" class="block text-xs font-semibold mb-2 uppercase tracking-wider text-kusog-dark">Contact Number</label>
                             <input id="reg-phone" type="tel" name="phone" required
@@ -546,8 +562,11 @@
         function validateForm(data) {
             const emailRe = /^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{2,}$/;
             const phoneRe = /^[\+]?[0-9\s\-\(\)]{7,20}$/;
-            const nameRe  = /^[A-Za-z\u00C0-\u024F\s'\-]{2,100}$/;
-            if (!nameRe.test(data.full_name))   return 'Please enter a valid full name (letters only, 2–100 characters).';
+            const nameRe  = /^[A-Za-z\u00C0-\u024F\s'\-]{1,50}$/;
+            const middleRe = /^[A-Za-z\u00C0-\u024F\s'\-]{0,50}$/;
+            if (!nameRe.test(data.first_name))  return 'Please enter a valid first name (letters only, 1–50 characters).';
+            if (!middleRe.test(data.middle_name)) return 'Please enter a valid middle name (letters only, up to 50 characters).';
+            if (!nameRe.test(data.last_name))   return 'Please enter a valid last name (letters only, 1–50 characters).';
             if (!emailRe.test(data.email))       return 'Please enter a valid email address.';
             if (!phoneRe.test(data.phone))       return 'Please enter a valid contact number.';
             if (data.organization.length > 150)  return 'Organization name is too long.';
@@ -577,9 +596,17 @@
                 return;
             }
 
+            // Shared token — must match SHARED_TOKEN in apps-script.gs
+            const FORM_TOKEN = 'kusog-2026-7f3a9c2e';
+
             // Collect and sanitize inputs
             const data = {
-                full_name:    sanitize(document.getElementById('reg-name').value),
+                token:        FORM_TOKEN,
+                website:      this.querySelector('input[name="website"]').value, // honeypot echo for server-side check
+                ts:           Date.now(),
+                first_name:   sanitize(document.getElementById('reg-first-name').value),
+                middle_name:  sanitize(document.getElementById('reg-middle-name').value),
+                last_name:    sanitize(document.getElementById('reg-last-name').value),
                 email:        sanitize(document.getElementById('reg-email').value),
                 phone:        sanitize(document.getElementById('reg-phone').value),
                 organization: sanitize(document.getElementById('reg-org').value),
@@ -596,16 +623,36 @@
             submitBtn.disabled = true;
             submitBtn.textContent = 'Submitting…';
 
-            // TODO: Replace this block with EmailJS or Formspree call
-            // emailjs.send('SERVICE_ID', 'TEMPLATE_ID', data).then(...)
-            setTimeout(() => {
-                this.reset();
+            // Google Sheets endpoint — paste your Apps Script Web App URL here
+            const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzAit3p7e5QlANui2X6LogF_W4XtSJry-TrkqfeV4RLCc-pLa-UW2g9sitQDhJ2p8Zt/exec';
+
+            const form = this;
+            console.log('[Kusog] Submitting to:', SHEET_ENDPOINT);
+            console.log('[Kusog] Payload:', data);
+
+            // Apps Script Web App: use FormData to avoid CORS preflight.
+            // Server reads it as e.parameter.payload (JSON string).
+            const formData = new FormData();
+            formData.append('payload', JSON.stringify(data));
+
+            fetch(SHEET_ENDPOINT, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: formData
+            }).then((res) => {
+                console.log('[Kusog] Fetch resolved:', res);
+                form.reset();
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Submit Registration';
                 const msg = document.getElementById('successMessage');
                 msg.classList.remove('hidden');
                 setTimeout(() => msg.classList.add('hidden'), 5000);
-            }, 600);
+            }).catch((err) => {
+                console.error('[Kusog] Fetch failed:', err);
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Registration';
+                showError('Could not submit right now. Please try again shortly.');
+            });
         });
     </script>
 </body>
